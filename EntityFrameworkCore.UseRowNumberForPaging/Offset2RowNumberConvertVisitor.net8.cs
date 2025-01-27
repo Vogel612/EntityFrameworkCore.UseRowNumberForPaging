@@ -19,7 +19,7 @@ internal class Offset2RowNumberConvertVisitor : ExpressionVisitor
         var method = typeof(SelectExpression).GetMethod("GenerateOuterColumn", BindingFlags.NonPublic | BindingFlags.Instance);
         if (!typeof(ColumnExpression).IsAssignableFrom(method?.ReturnType))
         {
-            throw new InvalidOperationException("SelectExpression.GenerateOuterColum() was not found");
+            throw new InvalidOperationException("SelectExpression.GenerateOuterColumn() was not found");
         }
 
         TableReferenceExpressionType = method.GetParameters().First().ParameterType;
@@ -43,7 +43,7 @@ internal class Offset2RowNumberConvertVisitor : ExpressionVisitor
         }
         if (node is SelectExpression se)
         {
-            return VisitSelect(se);
+            node = VisitSelect(se);
         }
         return base.VisitExtension(node);
     }
